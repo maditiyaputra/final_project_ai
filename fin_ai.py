@@ -2,7 +2,6 @@ import os
 import json
 import requests
 from datetime import date
-from dotenv import load_dotenv
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_groq import ChatGroq
@@ -11,9 +10,8 @@ from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
 import streamlit as st
 import pandas as pd
 
-load_dotenv()
-GROQ_API_KEY =  os.getenv("GROQ_API_KEY")
-SECTORS_API_KEY = os.getenv("SECTORS_API_KEY")
+GROQ_API_KEY =  st.secrets["GROQ_API_KEY"]
+SECTORS_API_KEY = st.secrets["SECTORS_API_KEY"]
 
 
 def retrieve_from_endpoint(url: str) -> dict:
