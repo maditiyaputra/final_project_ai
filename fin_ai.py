@@ -116,7 +116,7 @@ def get_top_companies_by_tx_volume(
     return json.dumps(sorted_data)
 
 @tool
-def get_daily_tx(stock: str) -> str:
+def get_daily_tx(stock: str, start_date, end_date) -> str:
     """
     Get detail of stock prices or close price to see uptrend or downtrend
     and you can also see the number of company market caps per day.
@@ -125,7 +125,7 @@ def get_daily_tx(stock: str) -> str:
     :param end_date: receive end_date or the end date of the desired daily transaction data
     This tool will provide symbol, date, close price, volume, and market cap.
     """
-    url = f"https://api.sectors.app/v1/daily/{stock}/"
+    url = f"https://api.sectors.app/v1/daily/{stock}/?start={start_date}&end={end_date}"
 
     return retrieve_from_endpoint(url)
 
