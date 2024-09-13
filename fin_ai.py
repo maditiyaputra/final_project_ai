@@ -8,10 +8,11 @@ from langchain_groq import ChatGroq
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
 import streamlit as st
-import pandas as pd
 
-GROQ_API_KEY =  st.secrets["GROQ_API_KEY"]
-SECTORS_API_KEY = st.secrets["SECTORS_API_KEY"]
+st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
+
+GROQ_API_KEY =  st.sidebar.text_input("Enter your GROQ API key", type="password")
+SECTORS_API_KEY = st.sidebar.text_input("Enter your SECTORS API key", type="password")
 
 
 def retrieve_from_endpoint(url: str) -> dict:
@@ -230,10 +231,6 @@ agent_executor = AgentExecutor(agent=agent,
                                tools=tools, 
                                verbose=True
                                )
-
-# Streamlit
-
-st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
 
 st.title("🤖Financials Agent AI")
 
