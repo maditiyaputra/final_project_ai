@@ -229,9 +229,9 @@ agent_executor = AgentExecutor(agent=agent,
                                verbose=True
                                )
 
-st.title("🤖Financials Agent AI")
-
 st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
+
+st.title("🤖Financials Agent AI")
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
