@@ -9,9 +9,19 @@ from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
 import streamlit as st
 
-GROQ_API_KEY =  st.secrets["GROQ_API_KEY"]
-SECTORS_API_KEY = st.secrets["SECTORS_API_KEY"]
+st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
 
+if "sectors_api_key" not in st.session_state:
+    st.session_state["sectors_api_key"] = ""
+if "groq_api_key" not in st.session_state:
+    st.session_state["groq_api_key"] = ""
+
+with st.sidebar:
+    SECTORS_API_KEY = st.text_input(
+        "Sectors API Key", key="sectors_api_key", type="password"
+    )
+    GROQ_API_KEY = st.text_input("Groq API Key", key="groq_api_key", type="password")
+    button = st.button("Set API Keys")
 def retrieve_from_endpoint(url: str) -> dict:
     headers = {"Authorization": SECTORS_API_KEY}
 
@@ -228,8 +238,6 @@ agent_executor = AgentExecutor(agent=agent,
                                tools=tools, 
                                verbose=True
                                )
-
-st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
 
 st.title("🤖Financials Agent AI")
 
