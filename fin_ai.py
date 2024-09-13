@@ -192,6 +192,9 @@ prompt = ChatPromptTemplate.from_messages(
              explicitly provided, infer from the query. Whenever you return a 
              list of names, return also the corresponding values for each name.
              And use the tools.
+
+             The data you have is only in Indonesia and from IDX.
+             
              For comparison, ensure you provide the correct answer based on the specific query. 
              Accurately retrieve and compare data when required, and choose the right entity or value.
 
