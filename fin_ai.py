@@ -9,11 +9,8 @@ from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
 import streamlit as st
 
-st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
-
-GROQ_API_KEY =  st.sidebar.text_input("Enter your GROQ API key", type="password")
-SECTORS_API_KEY = st.sidebar.text_input("Enter your SECTORS API key", type="password")
-
+GROQ_API_KEY =  st.secrets["GROQ_API_KEY"]
+SECTORS_API_KEY = st.secrets["SECTORS_API_KEY"]
 
 def retrieve_from_endpoint(url: str) -> dict:
     headers = {"Authorization": SECTORS_API_KEY}
@@ -233,6 +230,8 @@ agent_executor = AgentExecutor(agent=agent,
                                )
 
 st.title("🤖Financials Agent AI")
+
+st.set_page_config(page_title="Financials Agent AI", page_icon="📊", layout="wide")
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
